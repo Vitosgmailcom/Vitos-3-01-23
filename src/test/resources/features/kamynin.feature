@@ -1,18 +1,23 @@
+@E2Ec
+Feature: E2E
 
-## Forgot password E2E (positive)
+  @E2E_NewQuiz
+  Scenario: Create a new quiz
+    Then I login as a Teacher "EmailField" and "PasswordField"
+    Then I wait for 2 sec
+    Then I create a new quiz
 
-    @I_can_do_it
-    Feature: Learning on how to work with repositories
+  @E2E_NewStudent
+  Scenario: Create a new student account
+    Then I create a new Student with email "vkqa20231@gmail.com" and password "Fall2022!"
 
-      @Forgot_password
-      Scenario: forgot password
-        Given I open url "http://ask-stage.portnov.com/#/login"
-        Then I wait for element with xpath "//h3[contains(text(),'Assessment Control')]" to be present
-        Then element with xpath " //*[text()='I forgot my password']" should be present
-        And I click on element using JavaScript with xpath " //*[text()='I forgot my password']"
-        Then element with xpath " //*[text()='Reset Password Request']" should be present
-        And I type "vitaly.kamynin@gmail.com" into element with xpath "//*[@id='mat-input-2']"
-        Then I click on element using JavaScript with xpath "//*[text()='Request Password Reset']"
-        Then I wait for element with xpath "//*[text()='Request Password Reset']" to be present
 
-    
+  @E2E_AssignQuiz
+  Scenario: Assign a quiz to the Student
+    Then I login as a Teacher "EmailField" and "PasswordField"
+    Then I Assign a quiz to a student
+
+  @E2E_AssignQuiz
+  Scenario: Student submits quiz
+    Then I login as a Student
+
